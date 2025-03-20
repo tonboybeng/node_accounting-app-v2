@@ -12,18 +12,19 @@ function getExpenses(userId, from, to, categories) {
   }
 
   if (from && to) {
-    const startDateTime = Date.parse(from);
-    const endDateTime = Date.parse(to);
+    const startDate = Date.parse(from);
+    const endDate = Date.parse(to);
 
     filterExpenses = filterExpenses.filter(
       (e) =>
-        Date.parse(e.spentAt) <= endDateTime &&
-        Date.parse(e.spentAt) >= startDateTime,
+        Date.parse(e.spentAt) <= endDate && Date.parse(e.spentAt) >= startDate,
     );
   }
 
   if (categories) {
-    filterExpenses = filterExpenses.filter((e) => e.category === categories);
+    filterExpenses = filterExpenses.filter((e) => {
+      return categories.includes(e.category);
+    });
   }
 
   return filterExpenses;

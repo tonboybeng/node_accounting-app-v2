@@ -60,7 +60,7 @@ function createServer() {
 
     userService.deleteById(id);
 
-    res.status(204).json(user);
+    res.sendStatus(204);
   });
 
   app.patch('/users/:id', (req, res) => {
@@ -139,13 +139,13 @@ function createServer() {
 
     expenseService.deleteById(id);
 
-    res.status(204).json(expense);
+    res.sendStatus(204);
   });
 
   app.patch('/expenses/:id', (req, res) => {
     const { spentAt, title, amount, category, note } = req.body;
 
-    const expense = userService.getById(+req.params.id);
+    const expense = expenseService.getById(+req.params.id);
 
     if (!expense) {
       return res.sendStatus(404);
